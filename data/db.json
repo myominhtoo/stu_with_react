@@ -1,0 +1,26 @@
+{
+    "users" : [
+        {
+            "id" : 1,
+            "name" : "lionel",
+            "password":"lio#007",
+            "role" : "1"
+        }
+    ],
+    "courses" : [
+        {
+            "id" : 1,
+            "name" : "java"
+        }
+    ],
+    "students" : [
+        {
+            "id" : 1,
+            "name" : "Kyaw Kyaw",
+            "dob" : "2003-01-1",
+            "gender":"1",
+            "education" : 2,
+            "attendCourses" : [1]
+        }
+    ]
+}
