@@ -1,10 +1,15 @@
 import { useParams } from 'react-router-dom';
+import { Main } from '../components/Main';
 
 export const StudentPage = () => {
     const { id } = useParams();
     return (
         <>
-         <h1>Student {id} Page</h1>
+         <Navbar />
+         
+         <Main>
+            <h1>student page {id}</h1>
+         </Main>
         </>
     )
 }

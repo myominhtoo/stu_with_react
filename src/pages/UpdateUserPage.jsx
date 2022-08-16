@@ -1,7 +1,14 @@
+import { Navbar } from '../components/Navbar';
+import { Main } from '../components/Main';
+
 export const UpdateUserPage = () => {
     return (
         <>
-          <h1>Update user UpdateUserPage</h1>
+          <Navbar />
+          
+          <Main>
+            <h1>update user page</h1>
+          </Main>
         </>
     )
 }

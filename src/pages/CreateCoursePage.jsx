@@ -1,7 +1,14 @@
+import { Navbar } from '../components/Navbar';
+import { Main } from '../components/Main';
+
 export const CreateCoursePage = () => {
     return (
         <>
-          <h1>Create Course Page</h1>
+           <Navbar />
+        
+           <Main>
+                <h1>create course</h1>
+           </Main>
         </>
     )
 }

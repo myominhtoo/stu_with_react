@@ -1,7 +1,14 @@
+import { Navbar } from '../components/Navbar';
+import { Main } from '../components/Main';
+
 export const CreateStudentPage = () => {
     return (
         <>
-          <h1>Create Student Page</h1>
+           <Navbar />
+          
+           <Main>
+             <h1>crate student</h1>
+           </Main>
         </>
     )
 }

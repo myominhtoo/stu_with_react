@@ -1,0 +1,27 @@
+.w-15{
+    width:15% !important;
+}
+
+.w-85{
+    width:85% !important;
+}
+
+#link{
+    color:rgba(0,0,0,0.75);
+}
+
+#link:hover{
+    cursor: pointer;
+}
+
+* a{
+    text-decoration: none !important;
+}
+
+.active{
+    color:red !important;
+}
+
+body{
+    background : rgba(255,255,255,0.75) !important;
+}
