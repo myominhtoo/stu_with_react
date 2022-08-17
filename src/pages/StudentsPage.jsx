@@ -37,9 +37,29 @@ export const StudentsPage = () => {
           
           <Main>
 
-            <h3 className="h3 mx-5 my-3 px-3 text-center">Students Management</h3>
-        
-            <table className="mx-auto my-5 table table-striped w-75  table-bordered">
+            <h3 className="h3 mx-5 my-5 px-3 text-center">Students Management</h3>
+
+            <form className='d-flex gap-3 w-75 mx-auto'>
+                <div>
+                    <input type="text" className="form-control" placeholder='Student Id' />
+                </div>
+
+                <div>
+                    <input type="text" className="form-control" placeholder="Student's Name" />
+                </div>
+
+                <div>
+                    <input type="text" className="form-control" placeholder="Course Name" />
+                </div>
+
+                <div className='d-flex align-items-center gap-2'>
+                    <button type='submit' className="btn btn-success btn-sm fw-bold">Search</button>
+
+                    <Link to="/student/new" className='btn btn-secondary btn-sm fw-bold'>Add</Link>
+                </div>
+            </form>
+
+            <table className="mx-auto my-2 table table-striped w-75  table-bordered">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -55,7 +75,7 @@ export const StudentsPage = () => {
                       : students.map( stu => {
                           return (
                               <tr key={stu.id}>
-                                  <td>{stu.id}</td>
+                                  <td className='fw-bold'>{stu.id}</td>
                                   <td className='fw-bold'>{stu.name}</td>
                                   <td className='gap-1'>
                                     { stu.attendCourses.map( c => {

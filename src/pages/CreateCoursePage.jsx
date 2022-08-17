@@ -32,6 +32,8 @@ export const CreateCoursePage = () => {
         id : "",
         name : "",
     } );
+    
+    const [ isRegistering , setIsRegistering ] = useState( false );
 
 
     const validate = () => {
@@ -76,6 +78,7 @@ export const CreateCoursePage = () => {
                 }
                 else
                 {
+                    setIsRegistering(true);
                     fetch("http://localhost:3000/courses" , {
                         method : "post",
                         headers : {
@@ -87,6 +90,7 @@ export const CreateCoursePage = () => {
                         })
                     } )
                     .then( res => {
+                        setIsRegistering( false );
                         if(res.ok)
                         {
                             alert("Successfully Registered!");
@@ -137,7 +141,13 @@ export const CreateCoursePage = () => {
                     </div>
 
                     <div className="form-group my-3">
-                        <button className="btn btn-primary w-100">Register</button>
+                        <button type='submit' className="btn btn-primary w-100">
+                            {
+                                isRegistering
+                                ? "Registering..."
+                                : "Register"
+                            }
+                        </button>
                     </div>
 
                 </form>

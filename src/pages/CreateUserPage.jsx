@@ -1,7 +1,7 @@
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main';
 import React , { useReducer, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export const ERROR_ACTIONS = {
@@ -53,6 +53,10 @@ export const CreateUserPage = () => {
         confirmPwd : "",
         role : "",
     });
+
+    const [ isRegistering , setIsRegistering ] = useState(false);
+
+    const navigate = useNavigate();
 
 
     const validate = () => {
@@ -110,6 +114,7 @@ export const CreateUserPage = () => {
 
                 if( !isDuplicate )
                 {
+                    setIsRegistering( true );
                     fetch( "http://localhost:3000/users" , {
                         method : "POST",
                         body : JSON.stringify({
@@ -126,6 +131,7 @@ export const CreateUserPage = () => {
                     .then( data => {
                         if( data != null )
                         {
+                            setIsRegistering( false );
                             alert("Successfully Registered!");
                             setData({
                                 name : "",
@@ -227,7 +233,13 @@ export const CreateUserPage = () => {
                 </div>
 
                 <div className="form-group">
-                    <button type='submit' className="btn btn-primary w-100">Register</button>
+                    <button type='submit' className="btn btn-primary w-100">
+                        {
+                            isRegistering
+                            ? "Registering..."
+                            : "Register"
+                        }
+                    </button>
                 </div>
             </form>
 

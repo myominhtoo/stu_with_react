@@ -20,6 +20,13 @@
       "password": "james",
       "role": "1",
       "id": 3
+    },
+    {
+      "name": "Oliver",
+      "email": "oliver@gmail.com",
+      "password": "oliver",
+      "role": "1",
+      "id": 4
     }
   ],
   "courses": [
@@ -42,6 +49,10 @@
     {
       "id": "C005",
       "name": "php"
+    },
+    {
+      "id": "C006",
+      "name": "ruby"
     }
   ],
   "students": [
@@ -78,7 +89,7 @@
       "id": 3
     },
     {
-      "name": "Jason",
+      "name": "Jason Nice",
       "dob": "2022-08-06",
       "gender": "0",
       "education": "3",
@@ -97,6 +108,17 @@
         "C003"
       ],
       "id": 5
+    },
+    {
+      "name": "Selena",
+      "gender": "1",
+      "education": "1",
+      "dob": "2022-08-05",
+      "attendCourses": [
+        "C002",
+        "C003"
+      ],
+      "id": 6
     }
   ]
 }

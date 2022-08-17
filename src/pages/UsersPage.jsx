@@ -55,9 +55,9 @@ export const UsersPage = () => {
                 </div>
 
                 <div className='d-flex align-items-center gap-2'>
-                    <button type='submit' className="btn btn-success btn-sm">Search</button>
+                    <button type='submit' className="btn btn-success btn-sm fw-bold">Search</button>
 
-                    <Link to="/user/new" className='btn btn-secondary btn-sm'>Add</Link>
+                    <Link to="/user/new" className='btn btn-secondary btn-sm fw-bold'>Add</Link>
                 </div>
             </form>
 

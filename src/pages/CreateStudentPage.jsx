@@ -148,134 +148,134 @@ export const CreateStudentPage = () => {
 
             <form onSubmit={handleRegister} className="form w-50 mx-auto">
 
-              <div className="form-group my-3">
-                  <label htmlFor="" className="form-label">Name</label>
-                  <input
-                    value={student.name}
-                    onChange={ e => setStudent( prevStudent => {
-                      return { ...prevStudent , name : e.target.value }
-                    })}
-                    type="text" className="form-control" placeholder="Enter student's name " />
-                  <span id="error">{error.name}</span>
-              </div>
+                <div className="form-group my-3">
+                    <label htmlFor="" className="form-label">Name</label>
+                    <input
+                      value={student.name}
+                      onChange={ e => setStudent( prevStudent => {
+                        return { ...prevStudent , name : e.target.value }
+                      })}
+                      type="text" className="form-control" placeholder="Enter student's name " />
+                    <span id="error">{error.name}</span>
+                </div>
 
-              <div className="form-group my-3">
-                  <label htmlFor="" className="form-label">DOB</label>
-                  <input
-                    value={student.dob}
-                    onChange={ e => setStudent( prevStudent => {
-                      return { ...prevStudent , dob : e.target.value }
-                    })}
-                    type="date" className="form-control" placeholder="Enter student's dob" />
-                  <span id="error">{error.dob}</span>
-              </div>
+                <div className="form-group my-3">
+                    <label htmlFor="" className="form-label">DOB</label>
+                    <input
+                      value={student.dob}
+                      onChange={ e => setStudent( prevStudent => {
+                        return { ...prevStudent , dob : e.target.value }
+                      })}
+                      type="date" className="form-control" placeholder="Enter student's dob" />
+                    <span id="error">{error.dob}</span>
+                </div>
 
-              <div className="form-group my-3">
-                  <label htmlFor="" className="form-label">Gender</label>
-                  
-                  <div className="d-flex align-items-center gap-3">
-                    <div className="d-flex gap-1 align-items-center">
-                        <input
-                        value="0"
-                        onChange={ e => setStudent( prevStudent => {
-                          return { ...prevStudent , gender : e.target.value } 
-                        })}
-                        checked={ student.gender == "0" ? true : false }
-                        type="radio" name='gender' id='male' className='form-check' />
-                        <label htmlFor="male" className="form-label">Male</label>
+                <div className="form-group my-3">
+                    <label htmlFor="" className="form-label">Gender</label>
+                    
+                    <div className="d-flex align-items-center gap-3">
+                      <div className="d-flex gap-1 align-items-center">
+                          <input
+                          value="0"
+                          onChange={ e => setStudent( prevStudent => {
+                            return { ...prevStudent , gender : e.target.value } 
+                          })}
+                          checked={ student.gender == "0" ? true : false }
+                          type="radio" name='gender' id='male' className='form-check' />
+                          <label htmlFor="male" className="form-label">Male</label>
+                      </div>
+
+                      <div className="d-flex gap-1 align-items-center">
+                          <input
+                          type="radio"
+                          value="1"
+                          onChange={ e => setStudent( prevStudent => {
+                            return { ...prevStudent , gender : e.target.value } 
+                          })}
+                          checked={ student.gender == "1" ? true : false }
+                          name='gender' id='female' className="form-check" />
+                          <label htmlFor="female" className="form-label">Female</label>
+                      </div>
                     </div>
+                    <span id="error">{error.gender}</span>
+                </div>
 
-                    <div className="d-flex gap-1 align-items-center">
-                        <input
-                        type="radio"
-                        value="1"
-                        onChange={ e => setStudent( prevStudent => {
-                          return { ...prevStudent , gender : e.target.value } 
-                        })}
-                        checked={ student.gender == "1" ? true : false }
-                        name='gender' id='female' className="form-check" />
-                        <label htmlFor="female" className="form-label">Female</label>
-                    </div>
-                  </div>
-                  <span id="error">{error.gender}</span>
-              </div>
+                <div className="form-group my-3">
+                    <label htmlFor="" className="form-label">Education</label>
+                    
+                    <select
+                    value={student.education} 
+                    onChange={ e => setStudent( prevStudent => {
 
-              <div className="form-group my-3">
-                  <label htmlFor="" className="form-label">Education</label>
-                  
-                  <select
-                  value={student.education} 
-                  onChange={ e => setStudent( prevStudent => {
+                      return { ...prevStudent , education : e.target.value }
 
-                    return { ...prevStudent , education : e.target.value }
+                    } )}
+                    name="" id="" className="form-select">
+                      <option value="0" disabled>Choose Education</option>
+                      <option value="1">Diploma In IT</option>
+                      <option value="2">Bachelor In It</option>
+                      <option value="3">Master In It</option>
+                    </select>
+                    <span id="error">{error.education}</span>
+                </div>
 
-                  } )}
-                  name="" id="" className="form-select">
-                    <option value="0" disabled>Choose Education</option>
-                    <option value="1">Diploma In IT</option>
-                    <option value="2">Bachelor In It</option>
-                    <option value="3">Master In It</option>
-                  </select>
-                  <span id="error">{error.education}</span>
-              </div>
+                <div className="form-group my-3">
+                    <label htmlFor="" className="form-label">Attend Courses</label>
+                    
+                    <div className="d-flex gap-3 flex-wrap">
+                    { 
+                      isCourseLoading 
+                      ? <h6 className="h6 text-center">Loading...</h6>
+                      : courses.map( course => {
 
-              <div className="form-group my-3">
-                  <label htmlFor="" className="form-label">Attend Courses</label>
-                  
-                  <div className="d-flex gap-3 flex-wrap">
-                  { 
-                    isCourseLoading 
-                    ? <h6 className="h6 text-center">Loading...</h6>
-                    : courses.map( course => {
+                        return (
+                          <div key={course.id} className="d-flex gap-1 align-items-center">
+                            <label htmlFor={course.id} className="form-label text-capitalize">{course.name}</label>
+                            <input  
+                              onChange={ e => {
+                                setStudent( prevStudent => {
+                                  let attendCourses = [...prevStudent.attendCourses];
+                              
+                                  let curCourse = e.target.value;
 
-                      return (
-                        <div key={course.id} className="d-flex gap-1 align-items-center">
-                          <label htmlFor={course.id} className="form-label text-capitalize">{course.name}</label>
-                          <input  
-                            onChange={ e => {
-                              setStudent( prevStudent => {
-                                let attendCourses = [...prevStudent.attendCourses];
-                            
-                                let curCourse = e.target.value;
+                                  if( attendCourses.includes(curCourse))
+                                  {
+                                    attendCourses = attendCourses.filter( course => {
+                                      return course != curCourse;
+                                    })
+                                  }
+                                  else
+                                  {
+                                      attendCourses.push(curCourse)
+                                  }
+                                  
+                                  return { ...prevStudent , attendCourses : attendCourses }
 
-                                if( attendCourses.includes(curCourse))
-                                {
-                                  attendCourses = attendCourses.filter( course => {
-                                    return course != curCourse;
-                                  })
-                                }
-                                else
-                                {
-                                    attendCourses.push(curCourse)
-                                }
-                                
-                                return { ...prevStudent , attendCourses : attendCourses }
+                                })
+                              }}
+                              value={course.id}
+                              checked={ student.attendCourses.includes(course.id) ? true : false  }
+                              type="checkbox" id={course.id} className="form-check" />
+                          </div>
+                        )
 
-                              })
-                            }}
-                            value={course.id}
-                            checked={ student.attendCourses.includes(course.id) ? true : false  }
-                            type="checkbox" id={course.id} className="form-check" />
-                        </div>
-                      )
-
-                    })
-                  }
-                  </div>
-
-                  <span id="error">{error.courses}</span>
-
-              </div>
-
-              <div className="form-group my-3">
-                  <button className="btn btn-primary w-100">
-                    {
-                      isRegisterLoading 
-                      ? "Loading..."
-                      : "Register"
+                      })
                     }
-                  </button>
-              </div>
+                    </div>
+
+                    <span id="error">{error.courses}</span>
+
+                </div>
+
+                <div className="form-group my-3">
+                    <button type='submit' className="btn btn-primary w-100">
+                      {
+                        isRegisterLoading 
+                        ? "Loading..."
+                        : "Register"
+                      }
+                    </button>
+                </div>
 
             </form>
 
