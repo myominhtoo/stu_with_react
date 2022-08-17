@@ -78,10 +78,10 @@ export const UsersPage = () => {
                                 <td className='fw-bold'>{user.id}</td>
                                 <td className='fw-bold'>{user.name}</td>
                                 <td className='gap-1'>
-                                    <Link to={"/users/"+user.id} className="btn btn-success btn-sm mx-1">Update</Link>
+                                    <Link to={"/users/"+user.id} className="fw-bold btn btn-success btn-sm mx-1">Update</Link>
                                     <a 
                                     onClick={ () => deleteUser(user.id)}
-                                    className="btn btn-danger btn-sm mx-1">Delete</a>
+                                    className="btn btn-danger btn-sm mx-1 fw-bold">Delete</a>
                                 </td>
                             </tr>
                         )

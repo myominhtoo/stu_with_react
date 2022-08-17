@@ -49,11 +49,54 @@
       "id": 1,
       "name": "Kyaw Kyaw",
       "dob": "2003-01-1",
-      "gender": "1",
+      "gender": "0",
       "education": 2,
       "attendCourses": [
-        1
+        "C001"
       ]
+    },
+    {
+      "name": "Aung Aung",
+      "dob": "2022-08-02",
+      "gender": "0",
+      "education": "2",
+      "attendCourses": [
+        "C002",
+        "C003"
+      ],
+      "id": 2
+    },
+    {
+      "name": "Sakura",
+      "dob": "2010-01-01",
+      "gender": "1",
+      "education": "3",
+      "attendCourses": [
+        "C004",
+        "C002"
+      ],
+      "id": 3
+    },
+    {
+      "name": "Jason",
+      "dob": "2022-08-06",
+      "gender": "0",
+      "education": "3",
+      "attendCourses": [
+        "C001",
+        "C005"
+      ],
+      "id": 4
+    },
+    {
+      "name": "Tonie",
+      "dob": "2018-07-01",
+      "gender": "0",
+      "education": "2",
+      "attendCourses": [
+        "C003"
+      ],
+      "id": 5
     }
   ]
 }

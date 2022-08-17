@@ -1,11 +1,13 @@
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main';
 import { useEffect , useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const StudentsPage = () => {
 
     const [ students , setStudents ] = useState([]);
     const [ courses , setCourses ] = useState([]);
+    const [ isLoading , setIsLoading ] = useState(false);
 
     const fetchCourses = () => {
       fetch("http://localhost:3000/courses")
@@ -14,10 +16,14 @@ export const StudentsPage = () => {
     }
 
     const fetchStudents = () => {
+      setIsLoading(true);
       fetchCourses();
       fetch("http://localhost:3000/students")
       .then( res => res.json())
-      .then( datas => setStudents(datas) );
+      .then( datas => {
+        setIsLoading(false);
+        setStudents(datas)
+      } );
     }
 
 
@@ -43,24 +49,28 @@ export const StudentsPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    { students.map( stu => {
-                        return (
-                            <tr key={stu.id}>
-                                <td>{stu.id}</td>
-                                <td className='fw-bold'>{stu.name}</td>
-                                <td className='gap-1'>
-                                  { stu.attendCourses.map( c => {
-                                    return courses.filter( course => course.id == c ).map( result => {
-                                      return <span className='btn btn-sm btn-success' key={result.id}>{result.name}</span>
-                                    })
-                                  })}
-                                </td>
-                                <td>
-                                  <a href="" className="btn btn-success btn-sm">Detail</a>
-                                </td>
-                            </tr>
-                        )
-                    }) }
+                    { 
+                      isLoading
+                      ? <tr><td className='text-center h6' colSpan="4">Loading...</td></tr>
+                      : students.map( stu => {
+                          return (
+                              <tr key={stu.id}>
+                                  <td>{stu.id}</td>
+                                  <td className='fw-bold'>{stu.name}</td>
+                                  <td className='gap-1'>
+                                    { stu.attendCourses.map( c => {
+                                      return courses.filter( course => course.id == c ).map( result => {
+                                        return <span className='btn btn-sm btn-primary fw-bold mx-1 text-capitalize' key={result.id}>{result.name}</span>
+                                      })
+                                    })}
+                                  </td>
+                                  <td>
+                                    <Link to={"/students/"+stu.id} className="btn btn-success btn-sm fw-bold">Detail</Link>
+                                  </td>
+                              </tr>
+                          )
+                        })
+                    }
                 </tbody>
             </table>
 
