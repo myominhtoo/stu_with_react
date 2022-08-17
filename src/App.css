@@ -10,6 +10,12 @@
     color:rgba(0,0,0,0.75);
 }
 
+#error{
+    font-size: 15px !important;
+    color:red;
+    font-weight: bold;
+}
+
 #link:hover{
     cursor: pointer;
 }
