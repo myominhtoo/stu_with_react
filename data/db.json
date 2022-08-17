@@ -24,8 +24,24 @@
   ],
   "courses": [
     {
-      "id": 1,
+      "id": "C001",
       "name": "java"
+    },
+    {
+      "id": "C002",
+      "name": "react"
+    },
+    {
+      "id": "C003",
+      "name": "spring"
+    },
+    {
+      "id": "C004",
+      "name": "node"
+    },
+    {
+      "id": "C005",
+      "name": "php"
     }
   ],
   "students": [

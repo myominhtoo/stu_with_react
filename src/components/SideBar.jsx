@@ -13,7 +13,7 @@ export const SideBar = () => {
                 {
                     isShow && 
                     <div className="d-flex flex-column">
-                        <NavLink to="/course/new" className="h6 shadow-sm btn-sm p-2 rounded" id="link">Create Course</NavLink>
+                        <NavLink to="/course/new" className="h6 shadow-sm btn-sm p-2 rounded" id="link">Register Course</NavLink>
                         <NavLink to="/student/new" className="h6 shadow-sm btn-sm p-2 rounded" id="link">Register Student</NavLink>
                         <NavLink to="/students" className="h6 shadow-sm btn-sm p-2 rounded" id="link">Student Management</NavLink>
                     </div>
