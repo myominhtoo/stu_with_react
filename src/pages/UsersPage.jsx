@@ -8,6 +8,13 @@ export const UsersPage = () => {
     const [ users , setUsers ] = useState([]);
     const [ isLoading , setIsLoading ] = useState(false);
 
+    const [ search , setSearch ] = useState({
+        id : "",
+        name : ""
+    });
+
+    const [ isSearching , setIsSearching ] = useState(false);
+
     function fetchUsers()
     {
         setIsLoading(true);
@@ -32,6 +39,68 @@ export const UsersPage = () => {
         }
     }
 
+    function fetchById()
+    {
+        setIsSearching( true );
+        fetch(`http://localhost:3000/users?id_like=${search.id}`)
+        .then( res => res.json() )
+        .then( users => {
+            setIsSearching( false );
+            setUsers( users );
+        });
+    }
+
+    function fetchByName()
+    {
+        setIsSearching( true );
+        fetch(`http://localhost:3000/users?name_like=${search.name}`)
+        .then( res => res.json() )
+        .then( users => {
+            setIsSearching( false );
+            setUsers( users );
+        });
+    }
+
+    function fetchByIdAndName()
+    {
+        setIsSearching( true );
+        fetch(`http://localhost:3000/users?id_like=${search.id}&name_like=${search.name}`)
+        .then( res => res.json() )
+        .then( users => {
+            setIsSearching( false );
+            setUsers( users );
+        });
+    }
+
+    function handleSearch( e )
+    {
+        e.preventDefault();
+        
+        if( search.id != "" && search.name == "" )
+        {
+           fetchById();
+        }
+
+        else if( search.id == "" && search.name != "" )
+        {
+            fetchByName();
+        }
+
+        else if( search.id != "" && search.name != "" )
+        {
+            fetchByIdAndName();
+        }
+
+        else{
+            fetchUsers();
+        }
+        
+        setSearch({
+            id : "",
+            name : ""
+        })
+    }
+
     useEffect(() => {
         fetchUsers();
     } , [] );
@@ -45,17 +114,37 @@ export const UsersPage = () => {
             
             <h3 className="h3 mx-5 my-5 px-3 text-center">Users Management</h3>
 
-            <form className='d-flex gap-3 w-75 mx-auto'>
+            <form onSubmit={handleSearch} className='d-flex gap-3 w-75 mx-auto'>
                 <div>
-                    <input type="text" className="form-control" placeholder='User Id' />
+                    <input
+                      value={search.id}
+                      onChange={ e => {
+                        setSearch( prevSearch => {
+                            return { ...prevSearch , id : e.target.value }
+                        })
+                      }}
+                      type="text" className="form-control" placeholder='User Id' />
                 </div>
 
                 <div>
-                    <input type="text" className="form-control" placeholder="User Name" />
+                    <input
+                     value={search.name}
+                     onChange={ e => {
+                        setSearch( prevSearch => {
+                            return { ...prevSearch , name : e.target.value }
+                        })
+                     }}
+                     type="text" className="form-control" placeholder="User Name" />
                 </div>
 
                 <div className='d-flex align-items-center gap-2'>
-                    <button type='submit' className="btn btn-success btn-sm fw-bold">Search</button>
+                    <button type='submit' className="btn btn-success btn-sm fw-bold">
+                        {
+                            isSearching
+                            ? "Searching..."
+                            : "Search"
+                        }
+                    </button>
 
                     <Link to="/user/new" className='btn btn-secondary btn-sm fw-bold'>Add</Link>
                 </div>
