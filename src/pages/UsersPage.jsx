@@ -161,20 +161,23 @@ export const UsersPage = () => {
                 <tbody>
                     { isLoading 
                       ? <tr><td colSpan="3" className='fw-bold text-center'>Loading</td></tr>
-                      : users.map( user => {
-                        return (
-                            <tr key={user.id}>
-                                <td className='fw-bold'>{user.id}</td>
-                                <td className='fw-bold'>{user.name}</td>
-                                <td className='gap-1'>
-                                    <Link to={"/users/"+user.id} className="fw-bold btn btn-success btn-sm mx-1">Update</Link>
-                                    <a 
-                                    onClick={ () => deleteUser(user.id)}
-                                    className="btn btn-danger btn-sm mx-1 fw-bold">Delete</a>
-                                </td>
-                            </tr>
-                        )
-                    }) }
+                      : users.length == 0
+                        ? <tr><td colSpan="3" className='text-center fw-bold h6'>There is no user to show!</td></tr>
+                        : users.map( user => {
+                            return (
+                                <tr key={user.id}>
+                                    <td className='fw-bold'>{user.id}</td>
+                                    <td className='fw-bold'>{user.name}</td>
+                                    <td className='gap-1'>
+                                        <Link to={"/users/"+user.id} className="fw-bold btn btn-success btn-sm mx-1">Update</Link>
+                                        <a 
+                                        onClick={ () => deleteUser(user.id)}
+                                        className="btn btn-danger btn-sm mx-1 fw-bold">Delete</a>
+                                    </td>
+                                </tr>
+                            )
+                        }) 
+                    }
                 </tbody>
             </table>
            

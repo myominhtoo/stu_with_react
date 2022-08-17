@@ -9,6 +9,14 @@ export const StudentsPage = () => {
     const [ courses , setCourses ] = useState([]);
     const [ isLoading , setIsLoading ] = useState(false);
 
+    const [ search , setSearch ] = useState({
+      id : "",
+      name : "",
+      course: ""
+    });
+
+    const [ isSearching , setIsSearching ] = useState( false );
+
     const fetchCourses = () => {
       fetch("http://localhost:3000/courses")
       .then( res => res.json())
@@ -26,6 +34,69 @@ export const StudentsPage = () => {
       } );
     }
 
+    const searchStudents = () => {
+        
+      let targetAPI = `http://localhost:3000/students`;
+
+      if( search.id != "" && search.name == "" && search.course == "" )
+      {
+        targetAPI += `?id_like=${search.id}`;
+      }
+      else if( search.id == "" && search.name != "" && search.course == "" )
+      {
+        targetAPI += `?name_like=${search.name}`;
+      }
+      else if( search.id == "" && search.name == "" && search.course != "" )
+      {
+        targetAPI += `?attendCourses_like=${search.course}`;
+      }
+      else if( search.id != "" && search.name != "" && search.course == "")
+      {
+        targetAPI += `?id_like=${search.id}&name_like=${search.name}`;
+      }
+      else if( search.id != "" && search.name == "" && search.course != "" )
+      {
+        targetAPI += `?id_like=${search.id}&attendCourses_like=${search.course}`;
+      }
+      else if( search.id == "" && search.name != "" && search.course != "" )
+      {
+        targetAPI += `?name_like=${search.name}&attendCourses_like=${search.course}`;
+      }
+      else if( search.id != "" && search.name  != "" && search.course != "" )
+      {
+        targetAPI += `?id_like=${search.id}&name_like=${search.name}&attendCourses_like=${search.course}`;
+      }
+      else{
+        targetAPI = targetAPI;
+      }
+
+      setIsSearching( true );
+      
+      fetch(targetAPI)
+      .then( res => res.json())
+      .then( students => {
+        if( students != null )
+        {
+          setIsSearching( false );
+          setStudents( students );
+        }
+      })
+
+    }
+
+    const handleSearch = ( e ) => {
+      
+        e.preventDefault();
+
+        searchStudents();
+
+        setSearch({
+          id : "",
+          name : "",
+          course : ""
+        });
+    }
+
 
     useEffect(() => {
       fetchStudents();
@@ -39,21 +110,48 @@ export const StudentsPage = () => {
 
             <h3 className="h3 mx-5 my-5 px-3 text-center">Students Management</h3>
 
-            <form className='d-flex gap-3 w-75 mx-auto'>
+            <form onSubmit={handleSearch} className='d-flex gap-3 w-75 mx-auto'>
                 <div>
-                    <input type="text" className="form-control" placeholder='Student Id' />
+                    <input
+                       value={search.id}
+                       onChange={ e => {
+                        setSearch( prevSearch => {
+                          return { ...prevSearch , id : e.target.value }
+                        })
+                       }}
+                       type="text" className="form-control" placeholder='Student Id' />
                 </div>
 
                 <div>
-                    <input type="text" className="form-control" placeholder="Student's Name" />
+                    <input
+                      value={search.name}
+                      onChange={ e => {
+                        setSearch( prevSearch => {
+                          return { ...prevSearch , name : e.target.value }
+                        })
+                      }}
+                      type="text" className="form-control" placeholder="Student's Name" />
                 </div>
 
                 <div>
-                    <input type="text" className="form-control" placeholder="Course Name" />
+                    <input
+                       value={search.course}
+                       onChange={ e => {
+                        setSearch( prevSearch => {
+                          return { ...prevSearch , course : e.target.value }
+                        })
+                       }}
+                       type="text" className="form-control" placeholder="Course Name" />
                 </div>
 
                 <div className='d-flex align-items-center gap-2'>
-                    <button type='submit' className="btn btn-success btn-sm fw-bold">Search</button>
+                    <button type='submit' className="btn btn-success btn-sm fw-bold">
+                      {
+                        isSearching 
+                        ? "Searching..."
+                        : "Search"
+                      }
+                    </button>
 
                     <Link to="/student/new" className='btn btn-secondary btn-sm fw-bold'>Add</Link>
                 </div>
@@ -72,7 +170,9 @@ export const StudentsPage = () => {
                     { 
                       isLoading
                       ? <tr><td className='text-center h6' colSpan="4">Loading...</td></tr>
-                      : students.map( stu => {
+                      : students.length == 0
+                        ? <tr><td className='text-center h6' colSpan="4">There is no student to show!</td></tr>
+                        : students.map( stu => {
                           return (
                               <tr key={stu.id}>
                                   <td className='fw-bold'>{stu.id}</td>
