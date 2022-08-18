@@ -9,7 +9,7 @@ export const SideBar = () => {
     return (
         <nav className="w-15 px-3 py-3 d-flex flex-column gap-3">
             <div className="d-flex flex-column gap-1">
-                <span onClick={toggleShow} className="h6 shadow-sm btn-sm p-2 rounded" id="link">Class Management { isShow ? "v" : ">" } </span>      
+                <span onClick={toggleShow} className="h6 shadow-sm btn-sm p-2 rounded" id="link">Class Management { isShow ? <i className="fa-solid fa-chevron-down"></i>  : <i className="fa-solid fa-chevron-right"></i> } </span>      
                 {
                     isShow && 
                     <div className="d-flex flex-column">
