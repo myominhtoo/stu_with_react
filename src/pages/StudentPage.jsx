@@ -2,6 +2,7 @@ import { useEffect , useReducer, useState  } from 'react';
 import { useParams , useNavigate } from 'react-router-dom';
 import { Main } from '../components/Main';
 import { Navbar } from '../components/Navbar';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { errorReducer , ERROR_ACTIONS } from './CreateStudentPage.jsx';
 
 export const StudentPage = () => {
@@ -25,6 +26,23 @@ export const StudentPage = () => {
     });
 
     const navigate = useNavigate();
+
+    const [ authUser , setAuthUser ] = useState({});
+
+    const { get } = useLocalStorage();
+  
+    useEffect(() => {
+
+      if( get("user") == null )
+      {
+        navigate("/login?status=Please continue to login!" , { replace : true } );
+      }
+      else{
+        setAuthUser(get("user"));
+      }
+      
+    } , [] );
+
 
     const fetchCourses = () => {
         setIsCourseLoading( true );
@@ -136,7 +154,9 @@ export const StudentPage = () => {
 
     return (
         <>
-         <Navbar />
+         <Navbar
+          user={authUser}
+         />
          
          <Main>
             

@@ -1,6 +1,7 @@
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main';
-import React , { useReducer, useState } from 'react';
+import useLocalStorage  from '../hooks/useLocalStorage.js';
+import React , { useReducer, useState , useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -57,6 +58,22 @@ export const CreateUserPage = () => {
     const [ isRegistering , setIsRegistering ] = useState(false);
 
     const navigate = useNavigate();
+
+    const [ authUser , setAuthUser ] = useState({});
+
+    const { get } = useLocalStorage();
+  
+    useEffect(() => {
+
+      if( get("user") == null )
+      {
+        navigate("/login?status=Please continue to login!" , { replace : true } );
+      }
+      else{
+        setAuthUser(get("user"));
+      }
+      
+    } , [] );
 
 
     const validate = () => {
@@ -157,7 +174,9 @@ export const CreateUserPage = () => {
 
     return (
         <>
-           <Navbar />
+           <Navbar
+            user={authUser}
+           />
           
            <Main>
 

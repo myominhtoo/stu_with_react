@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main.jsx';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { useEffect , useState , useReducer  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ERROR_ACTIONS , errorReducer } from './CreateUserPage.jsx';
@@ -22,6 +23,23 @@ export const UserPage = () => {
     const [ user , setUser ] = useState({
         confirmPwd : "",
     });
+
+    const [ authUser , setAuthUser ] = useState({});
+
+    const { get } = useLocalStorage();
+  
+    useEffect(() => {
+
+      if( get("user") == null )
+      {
+        navigate("/login?status=Please continue to login!" , { replace : true } );
+      }
+      else{
+        setAuthUser(get("user"));
+      }
+      
+    } , [] );
+
 
     function fetchUser()
     {
@@ -132,7 +150,9 @@ export const UserPage = () => {
 
     return (
         <>
-         <Navbar />
+         <Navbar
+          user={authUser}
+         />
          
          <Main>
             

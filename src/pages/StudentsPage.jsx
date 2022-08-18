@@ -1,5 +1,7 @@
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main';
+import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { useEffect , useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -16,6 +18,25 @@ export const StudentsPage = () => {
     });
 
     const [ isSearching , setIsSearching ] = useState( false );
+
+    const navigate = useNavigate();
+
+    const [ authUser , setAuthUser ] = useState({});
+
+    const { get } = useLocalStorage();
+  
+    useEffect(() => {
+
+      if( get("user") == null )
+      {
+        navigate("/login?status=Please continue to login!" , { replace : true } );
+      }
+      else{
+        setAuthUser(get("user"));
+      }
+      
+    } , [] );
+
 
     const fetchCourses = () => {
       fetch("http://localhost:3000/courses")
@@ -104,7 +125,9 @@ export const StudentsPage = () => {
 
     return (
         <>
-          <Navbar />
+          <Navbar
+           user={authUser}
+          />
           
           <Main>
 

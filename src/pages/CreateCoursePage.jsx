@@ -1,6 +1,8 @@
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main';
-import { useReducer, useState } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage.js';
+import { useNavigate } from 'react-router-dom';
+import { useReducer, useState , useEffect } from 'react';
 
 export const COURSE_ERR_ACTION = {
     SET_ID : "set-id",
@@ -34,6 +36,24 @@ export const CreateCoursePage = () => {
     } );
     
     const [ isRegistering , setIsRegistering ] = useState( false );
+
+    const [ authUser , setAuthUser ] = useState({});
+
+    const navigate = useNavigate();
+
+    const { get } = useLocalStorage();
+  
+    useEffect(() => {
+
+      if( get("user") == null )
+      {
+        navigate("/login?status=Please continue to login!" , { replace : true } );
+      }
+      else{
+        setAuthUser(get("user"));
+      }
+      
+    } , [] );
 
 
     const validate = () => {
@@ -110,7 +130,9 @@ export const CreateCoursePage = () => {
 
     return (
         <>
-           <Navbar />
+           <Navbar
+            user={authUser}
+           />
         
            <Main>
                 

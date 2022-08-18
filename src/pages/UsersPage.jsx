@@ -1,5 +1,7 @@
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main.jsx';
+import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '../hooks/useLocalStorage';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +16,25 @@ export const UsersPage = () => {
     });
 
     const [ isSearching , setIsSearching ] = useState(false);
+
+    const navigate = useNavigate();
+
+    const [ authUser , setAuthUser ] = useState({});
+
+    const { get } = useLocalStorage();
+  
+    useEffect(() => {
+
+      if( get("user") == null )
+      {
+        navigate("/login?status=Please continue to login!" , { replace : true } );
+      }
+      else{
+        setAuthUser(get("user"));
+      }
+      
+    } , [] );
+
 
     function fetchUsers()
     {
@@ -108,7 +129,9 @@ export const UsersPage = () => {
 
     return (
         <>  
-         <Navbar />
+         <Navbar
+          user={authUser}
+         />
         
          <Main>
             

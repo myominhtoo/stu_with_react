@@ -1,5 +1,7 @@
 import { Navbar } from '../components/Navbar';
 import { Main } from '../components/Main';
+import useLocalStorage from '../hooks/useLocalStorage.js';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useReducer, useState } from 'react';
 
 export const ERROR_ACTIONS = {
@@ -53,6 +55,24 @@ export const CreateStudentPage = () => {
       education : "",
       courses : ""
     });
+
+    const [ authUser , setAuthUser ] = useState({});
+
+    const navigate = useNavigate();
+
+    const { get } = useLocalStorage();
+  
+    useEffect(() => {
+
+      if( get("user") == null )
+      {
+        navigate("/login?status=Please continue to login!" , { replace : true } );
+      }
+      else{
+        setAuthUser(get("user"));
+      }
+      
+    } , [] );
 
     const fetchCourses = () => {
       setIsCourseLoading(true);
@@ -140,7 +160,9 @@ export const CreateStudentPage = () => {
 
     return (
         <>
-           <Navbar />
+           <Navbar
+            user={authUser}
+           />
           
            <Main>
              
