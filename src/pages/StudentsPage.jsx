@@ -69,7 +69,7 @@ export const StudentsPage = () => {
       }
       else if( search.id == "" && search.name == "" && search.course != "" )
       {
-        targetAPI += `?attendCourses_like=${search.course}`;
+        targetAPI += `?attendCourses_like=${search.course}`;      
       }
       else if( search.id != "" && search.name != "" && search.course == "")
       {
@@ -82,6 +82,7 @@ export const StudentsPage = () => {
       else if( search.id == "" && search.name != "" && search.course != "" )
       {
         targetAPI += `?name_like=${search.name}&attendCourses_like=${search.course}`;
+
       }
       else if( search.id != "" && search.name  != "" && search.course != "" )
       {
@@ -120,7 +121,11 @@ export const StudentsPage = () => {
 
 
     useEffect(() => {
+
       fetchStudents();
+
+      fetchCourses();
+
     } , [] );
 
     return (
@@ -157,14 +162,16 @@ export const StudentsPage = () => {
                 </div>
 
                 <div>
-                    <input
-                       value={search.course}
-                       onChange={ e => {
-                        setSearch( prevSearch => {
-                          return { ...prevSearch , course : e.target.value }
-                        })
-                       }}
-                       type="text" className="form-control" placeholder="Course Name" />
+                    <select
+                     onChange={ e => setSearch( prevSearch => {
+                        return { ...prevSearch , course : e.target.value }
+                     }) }
+                     value={search.course} id="" className="form-select">
+                      <option value="">Filter With Course</option>
+                     { courses.map( course => {
+                        return <option key={course.id} className="text-capitalize" value={course.id}>{course.name}</option>
+                     })}
+                    </select>
                 </div>
 
                 <div className='d-flex align-items-center gap-2'>

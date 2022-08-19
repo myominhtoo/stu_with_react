@@ -15,18 +15,18 @@
       "id": 2
     },
     {
-      "name": "james",
-      "email": "james@gmail.com",
-      "password": "james",
-      "role": "1",
-      "id": 3
-    },
-    {
       "name": "Oliver",
       "email": "oliver@gmail.com",
       "password": "oliver",
       "role": "1",
       "id": 4
+    },
+    {
+      "name": "Charles Oliver",
+      "email": "charles@gmail.com",
+      "password": "charles",
+      "role": "1",
+      "id": 5
     }
   ],
   "courses": [
@@ -53,18 +53,27 @@
     {
       "id": "C006",
       "name": "ruby"
+    },
+    {
+      "id": "C007",
+      "name": "Golang"
+    },
+    {
+      "id": "C008",
+      "name": "Carbon"
     }
   ],
   "students": [
     {
-      "id": 1,
-      "name": "Kyaw Kyaw",
-      "dob": "2003-01-01",
+      "name": "Kyaw Gyi",
       "gender": "0",
       "education": 2,
+      "dob": "2003-01-01",
       "attendCourses": [
-        "C001"
-      ]
+        "C001",
+        "C003"
+      ],
+      "id": 1
     },
     {
       "name": "Aung Aung",
@@ -100,16 +109,6 @@
       "id": 4
     },
     {
-      "name": "Tonie",
-      "dob": "2018-07-01",
-      "gender": "0",
-      "education": "2",
-      "attendCourses": [
-        "C003"
-      ],
-      "id": 5
-    },
-    {
       "name": "Selena",
       "gender": "1",
       "education": "1",
@@ -119,6 +118,17 @@
         "C003"
       ],
       "id": 6
+    },
+    {
+      "name": "Johnson",
+      "dob": "2018-01-01",
+      "gender": "0",
+      "education": "2",
+      "attendCourses": [
+        "C008",
+        "C006"
+      ],
+      "id": 7
     }
   ]
 }

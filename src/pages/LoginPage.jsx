@@ -110,7 +110,7 @@ export const LoginPage = () => {
                   onChange={ e => setUser( prevUser => {
                     return { ...prevUser , password : e.target.value }
                   }) }
-                  type="text" className="form-control" placeholder="Enter password" />
+                  type="password" className="form-control" placeholder="Enter password" />
                   <label id="error">{error.pwd}</label>
               </div>
 
