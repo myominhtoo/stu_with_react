@@ -9,6 +9,7 @@ import { CreateStudentPage } from './pages/CreateStudentPage';
 import { CreateUserPage } from './pages/CreateUserPage';
 import { StudentPage } from './pages/StudentPage';
 import { UserPage } from './pages/UserPage';
+import NotFound from './pages/NotFound.jsx';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/course/new" element={<CreateCoursePage/>} />
         <Route path="/student/new" element={<CreateStudentPage />} />
         <Route path="/user/new" element={<CreateUserPage />} />
+        <Route path="*" element={ <NotFound/> } />
       </Routes>
     </>
   )
